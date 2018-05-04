@@ -62,13 +62,13 @@ var n = 0;
 function start() {
   over = false;
   context.clearRect(0, 0, canvas.width, canvas.height);
-  snake1.draw();
-  snake2.draw();
   if (++n % 10 == 0) {
     snake1.growth();
     snake2.growth();
   }
   snake1.update();
   snake2.update();
+  snake1.draw();
+  snake2.draw();
   requestAnimationFrame(start);
 }
