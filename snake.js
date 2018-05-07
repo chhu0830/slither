@@ -44,4 +44,16 @@ class Snake {
   turnRight() {
     this.speed.setAngle(this.speed.getAngle() + Math.PI/this.radius);
   }
+
+  eat(food) {    
+    for(var i = 0; i < food.length; i++) {
+      var x = this.position[0].getX() - food.position[i].getX();
+      var y = this.position[0].getY() - food.position[i].getY();
+      var dist = Math.sqrt(x*x + y*y);
+      if(dist < this.size + food.size) {
+        this.growth();
+        food.delete(i);
+      }
+    }
+  }
 }
