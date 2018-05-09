@@ -51,24 +51,34 @@ function init() {
   context = canvas.getContext("2d");
 
   // x, y, speed, direction, radius, size, color
-  snake1 = new Snake(100, canvas.height/2 - 5, 5, 0, 32, 10, "#FF0000");
-  snake2 = new Snake(canvas.width-100, canvas.height/2 - 5, 5, -Math.PI, 32, 10, "#0000FF");
+  snake1 = new Snake(100, canvas.height/2 - 5, 3, 0, 50, 10, "#FF0000");
+  snake2 = new Snake(canvas.width-100, canvas.height/2 - 5, 3, -Math.PI, 32, 10, "#0000FF");
 
   snake1.draw();
   snake2.draw();
+
+  food = new Food(canvas.width, canvas.height, 10, 5);
 }
+
 
 var n = 0;
 function start() {
   over = false;
   context.clearRect(0, 0, canvas.width, canvas.height);
-  if (++n % 10 == 0) {
-    snake1.growth();
-    snake2.growth();
+  if (++n % 50 == 0) {
+    //snake1.growth();
+    //snake2.growth();
+    food.create();
   }
   snake1.update();
   snake2.update();
   snake1.draw();
   snake2.draw();
+
+  snake1.eat(food);
+  snake2.eat(food);
+
+  food.draw();
+
   requestAnimationFrame(start);
 }
