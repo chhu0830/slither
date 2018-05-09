@@ -50,14 +50,25 @@ function init() {
   canvas.height = canvas.clientHeight;
   context = canvas.getContext("2d");
 
-  // x, y, speed, direction, radius, size, color
-  snake1 = new Snake(100, canvas.height/2 - 5, 3, 0, 50, 10, "#FF0000");
-  snake2 = new Snake(canvas.width-100, canvas.height/2 - 5, 3, -Math.PI, 32, 10, "#0000FF");
+  snake1 = new Snake( x = 100,
+                      y = canvas.height/2 - 5,
+                      speed = 3,
+                      direction = 0,
+                      radius = 32,
+                      size = 10,
+                      color = "#FF0000");
+  snake2 = new Snake( x = canvas.width - 100,
+                      y = canvas.height/2 - 5,
+                      speed = 3,
+                      direction = -Math.PI,
+                      radius = 32,
+                      size = 10,
+                      color = "#0000FF");
 
   snake1.draw();
   snake2.draw();
 
-  food = new Food(canvas.width, canvas.height, 10, 5);
+  dots = new Dots();
 }
 
 
@@ -66,19 +77,18 @@ function start() {
   over = false;
   context.clearRect(0, 0, canvas.width, canvas.height);
   if (++n % 50 == 0) {
-    //snake1.growth();
-    //snake2.growth();
-    food.create();
+    dots.create(size = Math.floor(Math.random()*50),
+                color = '#'+(Math.random()*0xFFFFFF<<0).toString(16));
   }
   snake1.update();
   snake2.update();
+
+  snake1.eat(dots);
+  snake2.eat(dots);
+
   snake1.draw();
   snake2.draw();
-
-  snake1.eat(food);
-  snake2.eat(food);
-
-  food.draw();
+  dots.draw();
 
   requestAnimationFrame(start);
 }

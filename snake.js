@@ -45,14 +45,14 @@ class Snake {
     this.speed.setAngle(this.speed.getAngle() + Math.PI/this.radius);
   }
 
-  eat(food) {    
-    for(var i = 0; i < food.length; i++) {
-      var x = this.position[0].getX() - food.position[i].getX();
-      var y = this.position[0].getY() - food.position[i].getY();
+  eat(dots) {    
+    for(var i = 0; i < dots.list.length; i++) {
+      var x = this.position[0].getX() - dots.list[i].position.getX();
+      var y = this.position[0].getY() - dots.list[i].position.getY();
       var dist = Math.sqrt(x*x + y*y);
-      if(dist < this.size + food.size) {
+      if(dist < this.size + dots.list[i].size) {
         this.growth();
-        food.delete(i);
+        dots.delete(i);
       }
     }
   }
