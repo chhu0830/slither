@@ -1,11 +1,11 @@
 class Dots {
-	constructor() {
+  constructor() {
     this.list = new Array();
-	}
+  }
 
-	create(skill) {
+  create(skill) {
     this.list.push(skill)
-	}
+  }
 
   draw() {
     for (var i = 0; i < this.list.length; i++) {
@@ -13,8 +13,8 @@ class Dots {
     }
   }
 
-	delete(i, me, op) {
+  delete(i, me, op) {
     this.list[i].active(me, op);
-		this.list.splice(i, 1);
-	}
+    this.list.splice(i, 1);
+  }
 }

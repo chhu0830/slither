@@ -15,10 +15,10 @@ class Point {
     // target.point += this.point;
   }
 
-	draw() {
-		context.fillStyle = this.color;
+  draw() {
+    context.fillStyle = this.color;
     context.beginPath();
     context.arc(this.position.getX(), this.position.getY(), this.size, 0, Math.PI*2);
     context.fill();
-	}
+  }
 }
