@@ -77,14 +77,13 @@ function start() {
   over = false;
   context.clearRect(0, 0, canvas.width, canvas.height);
   if (++n % 50 == 0) {
-    dots.create(size = Math.floor(Math.random()*50),
-                color = '#'+(Math.random()*0xFFFFFF<<0).toString(16));
+    dots.create(new Point(x=null, y=null, size=Math.floor(Math.random()*50)));
   }
   snake1.update();
   snake2.update();
 
-  snake1.eat(dots);
-  snake2.eat(dots);
+  snake1.touch(dots, snake2);
+  snake2.touch(dots, snake1);
 
   snake1.draw();
   snake2.draw();

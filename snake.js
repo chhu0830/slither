@@ -34,7 +34,7 @@ class Snake {
   }
 
   growth() {
-    this.position.push(vector.create(0, 0));
+    this.position.push(vector.create(this.position[0].getX(), this.position[0].getY()));
   }
 
   turnLeft() {
@@ -45,14 +45,13 @@ class Snake {
     this.speed.setAngle(this.speed.getAngle() + Math.PI/this.radius);
   }
 
-  eat(dots) {    
+  touch(dots, op) {    
     for(var i = 0; i < dots.list.length; i++) {
       var x = this.position[0].getX() - dots.list[i].position.getX();
       var y = this.position[0].getY() - dots.list[i].position.getY();
       var dist = Math.sqrt(x*x + y*y);
       if(dist < this.size + dots.list[i].size) {
-        this.growth();
-        dots.delete(i);
+        dots.delete(i, this, op);
       }
     }
   }
