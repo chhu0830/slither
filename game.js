@@ -16,11 +16,17 @@ window.onload = function() {
       case 39:
         snake2.turningRight = true;
         break;
+      case 38:
+        snake2.speedingUp = true;
+        break;
       case 65:
         snake1.turningLeft = true;
         break;
       case 68:
         snake1.turningRight = true;
+        break;
+      case 87:
+        snake1.speedingUp = true;
         break;
     }
   });
@@ -32,11 +38,17 @@ window.onload = function() {
       case 39:
         snake2.turningRight = false;
         break;
+      case 38:
+        snake2.speedingUp = false;
+        break;
       case 65:
         snake1.turningLeft = false;
         break;
       case 68:
         snake1.turningRight = false;
+        break;
+      case 87:
+        snake1.speedingUp = false;
         break;
     }
   });
