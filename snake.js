@@ -32,13 +32,32 @@ class Snake {
       this.position[i].setX(this.position[i-1].getX());
       this.position[i].setY(this.position[i-1].getY());
     }
+
     if (this.turningLeft) this.turnLeft();
     if (this.turningRight) this.turnRight();
+
     this.position[0].addTo(this.speed);
-    if (this.position[0].getX() < 0 - this.size) this.position[0].setX(canvas.width + this.size);
-    if (this.position[0].getX() > canvas.width + this.size) this.position[0].setX(0 - this.size);
-    if (this.position[0].getY() < 0 - this.size) this.position[0].setY(canvas.height + this.size);
-    if (this.position[0].getY() > canvas.height + this.size) this.position[0].setY(0 - this.size);
+
+    if (this.position[0].getX() < this.size) {
+      this.position[0].setX(this.size)
+      if (this.speed.getY() > 0) this.speed.setAngle(Math.PI*0.5);
+      else this.speed.setAngle(Math.PI*1.5);
+    }
+    if (this.position[0].getX() > canvas.width - this.size) {
+      this.position[0].setX(canvas.width - this.size);
+      if (this.speed.getY() > 0) this.speed.setAngle(Math.PI*0.5);
+      else this.speed.setAngle(Math.PI*1.5);
+    }
+    if (this.position[0].getY() < this.size) {
+      this.position[0].setY(this.size);
+      if (this.speed.getX() > 0) this.speed.setAngle(0);
+      else this.speed.setAngle(Math.PI);
+    }
+    if (this.position[0].getY() > canvas.height - this.size) {
+      this.position[0].setY(canvas.height - this.size);
+      if (this.speed.getX() > 0) this.speed.setAngle(0);
+      else this.speed.setAngle(Math.PI);
+    }
   }
 
   growth() {
