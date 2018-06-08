@@ -13,6 +13,9 @@ window.onload = function() {
       case 37:
         snake2.turningLeft = true;
         break;
+      case 38:
+        snake2.speedingUp = true;
+        break;
       case 39:
         snake2.turningRight = true;
         break;
@@ -22,12 +25,18 @@ window.onload = function() {
       case 68:
         snake1.turningRight = true;
         break;
+      case 87:
+        snake1.speedingUp = true;
+        break;
     }
   });
   document.body.addEventListener("keyup", function(event) {
     switch (event.keyCode) {
       case 37:
         snake2.turningLeft = false;
+        break;
+      case 38:
+        snake2.speedingUp = false;
         break;
       case 39:
         snake2.turningRight = false;
@@ -37,6 +46,9 @@ window.onload = function() {
         break;
       case 68:
         snake1.turningRight = false;
+        break;
+      case 87:
+        snake1.speedingUp = false;
         break;
     }
   });

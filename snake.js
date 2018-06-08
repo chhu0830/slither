@@ -8,6 +8,9 @@ class Snake {
     this.color    = color;
     this.turningLeft = false;
     this.turningRight = false;
+    this.speedingUp = false;
+    this.consuming = 0;
+    this.consumeGap = 50;
   }
 
   draw() {
@@ -35,6 +38,7 @@ class Snake {
 
     if (this.turningLeft) this.turnLeft();
     if (this.turningRight) this.turnRight();
+    if (this.speedingUp) this.speedUp();
 
     this.position[0].addTo(this.speed);
 
@@ -73,7 +77,16 @@ class Snake {
     this.speed.setAngle(this.speed.getAngle() + Math.PI/this.radius);
   }
 
-  touch(dots, op) {    
+  speedUp() {
+    if (this.position.length > 1) {
+      this.position[0].addTo(this.speed);
+      if (++this.consuming % this.consumeGap == 0) {
+        this.position.pop();
+      }
+    }
+  }
+
+  touch(dots, op) {
     for(var i = 0; i < dots.list.length; i++) {
       var x = this.position[0].getX() - dots.list[i].position.getX();
       var y = this.position[0].getY() - dots.list[i].position.getY();
