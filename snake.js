@@ -11,8 +11,16 @@ class Snake {
   }
 
   draw() {
+    context.lineWidth = this.size*2;
+    context.strokeStyle = this.color;
+    for (var i = 1; i < this.position.length; i++) {
+      context.beginPath();
+      context.moveTo(this.position[i-1].getX(), this.position[i-1].getY());
+      context.lineTo(this.position[i].getX(), this.position[i].getY());
+      context.stroke();
+    }
     context.fillStyle = this.color;
-    for (var i = 0, len = this.position.length; i < len; i++) {
+    for (var i = 0; i < this.position.length; i++) {
       context.beginPath();
       context.arc(this.position[i].getX(), this.position[i].getY(), this.size, 0, Math.PI*2);
       context.fill();
@@ -34,7 +42,8 @@ class Snake {
   }
 
   growth() {
-    this.position.push(vector.create(this.position[0].getX(), this.position[0].getY()));
+    var len = this.position.length
+    this.position.push(vector.create(this.position[len-1].getX(), this.position[len-1].getY()));
   }
 
   turnLeft() {
