@@ -101,5 +101,7 @@ function start() {
   snake2.draw();
   dots.draw();
 
+  document.getElementById("p1").innerHTML = snake1.position.length;
+  document.getElementById("p2").innerHTML = snake2.position.length;
   requestAnimationFrame(start);
 }
