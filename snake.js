@@ -1,11 +1,12 @@
 class Snake {
-  constructor(x=0, y=0, speed=5, direction=0, radius=32, size=10, color="#000000") {
+  constructor(x=0, y=0, speed=5, direction=0, radius=32, size=10, color="#000000", body=null) {
     this.position = [vector.create(x, y)];
     this.speed    = vector.create(speed, 0);
     this.speed.setAngle(direction);
     this.radius   = radius;
     this.size     = size;
     this.color    = color;
+    this.body     = body || [color];
     this.turningLeft = false;
     this.turningRight = false;
     this.speedingUp = false;
@@ -14,20 +15,24 @@ class Snake {
   }
 
   draw() {
-    context.lineWidth = this.size*2;
-    context.strokeStyle = this.color;
-    for (var i = 1; i < this.position.length; i++) {
-      context.beginPath();
-      context.moveTo(this.position[i-1].getX(), this.position[i-1].getY());
-      context.lineTo(this.position[i].getX(), this.position[i].getY());
-      context.stroke();
-    }
-    context.fillStyle = this.color;
     for (var i = 0; i < this.position.length; i++) {
+      context.fillStyle = this.body[i % this.body.length];
       context.beginPath();
       context.arc(this.position[i].getX(), this.position[i].getY(), this.size, 0, Math.PI*2);
       context.fill();
     }
+    context.lineWidth = this.size*2;
+    for (var i = 0; i < this.position.length-1; i++) {
+      context.strokeStyle = this.body[i % this.body.length];
+      context.beginPath();
+      context.moveTo(this.position[i].getX(), this.position[i].getY());
+      context.lineTo(this.position[i+1].getX(), this.position[i+1].getY());
+      context.stroke();
+    }
+    context.fillStyle = this.color;
+    context.beginPath();
+    context.arc(this.position[0].getX(), this.position[0].getY(), this.size, 0, Math.PI*2);
+    context.fill();
   }
 
   update() {

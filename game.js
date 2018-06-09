@@ -64,18 +64,20 @@ function init() {
 
   snake1 = new Snake( x = 100,
                       y = canvas.height/2 - 5,
-                      speed = 3,
+                      speed = 5,
                       direction = 0,
                       radius = 32,
                       size = 10,
-                      color = "#FF0000");
+                      color = "red",
+                      body = ["#FF0000", "#FFA500", "#FFFF00", "#00FF00", "#007FFF", "#0000FF", "#8B00FF"]);
   snake2 = new Snake( x = canvas.width - 100,
                       y = canvas.height/2 - 5,
-                      speed = 3,
+                      speed = 5,
                       direction = -Math.PI,
                       radius = 32,
                       size = 10,
-                      color = "#0000FF");
+                      color = "blue",
+                      body = ["#FF0000", "#FFA500", "#FFFF00", "#00FF00", "#007FFF", "#0000FF", "#8B00FF"]);
 
   snake1.draw();
   snake2.draw();
