@@ -100,7 +100,7 @@ function init() {
     if (over) clearInterval(interval);
     if (!pause && !over) {
       document.getElementById('time').innerHTML = --timeout;
-      dots.create(new Point(x=null, y=null, size=Math.floor(Math.random()*50)));
+      dots.create(new Point(x=null, y=null, size=Math.ceil(Math.random()*50)));
     }
   }, 1000);
 
