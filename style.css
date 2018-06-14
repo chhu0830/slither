@@ -29,3 +29,12 @@ body {
   right: 20px;
   color: blue;
 }
+
+#time {
+  color: black;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 200px;
+}

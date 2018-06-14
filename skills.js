@@ -10,8 +10,8 @@ class Point {
   }
 
   active(me, op) {
-    me.growth();
-    // target.point += this.point;
+    for (var i = 0; i < 100 / this.size; i++)
+      me.growth();
   }
 
   draw() {

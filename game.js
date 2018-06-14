@@ -3,6 +3,7 @@ var context = null;
 var snake = null;
 var over  = false;
 var pause = false;
+var timeout = null;
 
 window.onload = function() {
   document.body.addEventListener("keydown", function(event) {
@@ -91,15 +92,25 @@ function init() {
   document.getElementById("score1").innerHTML = 0;
   document.getElementById("score2").innerHTML = 0;
 
+  timeout = 60;
+  document.getElementById('time').innerHTML = timeout;
+
+  var interval = null;
+  interval = setInterval(function() {
+    if (over) clearInterval(interval);
+    if (!pause && !over) {
+      document.getElementById('time').innerHTML = --timeout;
+      dots.create(new Point(x=null, y=null, size=Math.floor(Math.random()*50)));
+    }
+  }, 1000);
+
   pause = true;
   game();
 }
 
 
-var n = 0;
 function game() {
   if (!pause) {
-    if (++n % 50 == 0) dots.create(new Point(x=null, y=null, size=Math.floor(Math.random()*50)));
     snake1.update();
     snake2.update();
 
@@ -110,8 +121,15 @@ function game() {
       dots.delete(i, snake2, snake1);
     });
 
-    over = snake1.touch(snake2.position.map(p => Object({position:p, size:snake2.size}))).length > 0
-        || snake2.touch(snake1.position.map(p => Object({position:p, size:snake1.size}))).length > 0
+    var t1 = snake1.touch(snake2.position.map(p => Object({position:p, size:snake2.size})));
+    var t2 = snake2.touch(snake1.position.map(p => Object({position:p, size:snake1.size})));
+    if (t1.length > 0) snake2.position.splice(t1[0] || 1);
+    if (t2.length > 0) snake1.position.splice(t2[0] || 1);
+    if (timeout == 0) {
+      if (snake1.position.length > snake2.position.length) gameover("Red Win");
+      else if (snake2.position.length > snake1.position.length) gameover("Blue Win");
+      else gameover("Draw");
+    }
 
     document.getElementById("score1").innerHTML = snake1.position.length;
     document.getElementById("score2").innerHTML = snake2.position.length;
@@ -122,4 +140,9 @@ function game() {
     dots.draw();
   }
   if (!over) requestAnimationFrame(game);
+}
+
+function gameover(content) {
+  over = true;
+  document.getElementById("time").innerHTML = content;
 }

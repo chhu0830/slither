@@ -9,20 +9,21 @@ class Snake {
     this.body     = body || [color];
     this.turningLeft = false;
     this.turningRight = false;
+    this.speedingUpRate = 3;
     this.speedingUp = false;
     this.consuming = 0;
     this.consumeGap = 50;
   }
 
   draw() {
-    for (var i = 0; i < this.position.length; i++) {
+    for (var i = this.position.length - 1; i >= 0; i--) {
       context.fillStyle = this.body[i % this.body.length];
       context.beginPath();
       context.arc(this.position[i].getX(), this.position[i].getY(), this.size, 0, Math.PI*2);
       context.fill();
     }
     context.lineWidth = this.size*2;
-    for (var i = 0; i < this.position.length-1; i++) {
+    for (var i = this.position.length - 2; i >= 0; i--) {
       context.strokeStyle = this.body[i % this.body.length];
       context.beginPath();
       context.moveTo(this.position[i].getX(), this.position[i].getY());
@@ -83,10 +84,10 @@ class Snake {
   }
 
   speedUp() {
-    if (this.position.length > 1) {
-      this.position[0].addTo(this.speed);
+    if (this.position.length >= 10) {
+      this.position[0].addTo(this.speed.multiply(this.speedingUpRate/Math.sqrt(2) - 1));
       if (++this.consuming % this.consumeGap == 0) {
-        this.position.pop();
+        this.position.splice(-Math.floor(this.position.length/10));
       }
     }
   }
