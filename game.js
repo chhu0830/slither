@@ -2,13 +2,18 @@ var canvas = null;
 var context = null;
 var snake = null;
 var over  = true;
+var pause = false;
 
 window.onload = function() {
   document.body.addEventListener("keydown", function(event) {
-    console.log(event.keyCode);
+    // console.log(event.keyCode);
     switch (event.keyCode) {
       case 32:
-        if (over) start();
+        if (over) {
+          over = false;
+          game();
+        }
+        else pause ^= 1;
         break;
       case 37:
         snake2.turningLeft = true;
@@ -87,23 +92,26 @@ function init() {
 
 
 var n = 0;
-function start() {
-  over = false;
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  if (++n % 50 == 0) {
-    dots.create(new Point(x=null, y=null, size=Math.floor(Math.random()*50)));
+function game() {
+  if (!pause) {
+    if (++n % 50 == 0) dots.create(new Point(x=null, y=null, size=Math.floor(Math.random()*50)));
+    snake1.update();
+    snake2.update();
+
+    snake1.touch(dots.list).forEach(i => {
+      dots.delete(i, snake1, snake2);
+    });
+    snake2.touch(dots.list).forEach(i => {
+      dots.delete(i, snake2, snake1);
+    });
+
+    document.getElementById("score1").innerHTML = snake1.position.length;
+    document.getElementById("score2").innerHTML = snake2.position.length;
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    snake1.draw();
+    snake2.draw();
+    dots.draw();
   }
-  snake1.update();
-  snake2.update();
-
-  snake1.touch(dots, snake2);
-  snake2.touch(dots, snake1);
-
-  snake1.draw();
-  snake2.draw();
-  dots.draw();
-
-  document.getElementById("score1").innerHTML = snake1.position.length;
-  document.getElementById("score2").innerHTML = snake2.position.length;
-  requestAnimationFrame(start);
+  requestAnimationFrame(game);
 }

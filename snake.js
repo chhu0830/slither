@@ -91,14 +91,16 @@ class Snake {
     }
   }
 
-  touch(dots, op) {
-    for(var i = 0; i < dots.list.length; i++) {
-      var x = this.position[0].getX() - dots.list[i].position.getX();
-      var y = this.position[0].getY() - dots.list[i].position.getY();
-      var dist = Math.sqrt(x*x + y*y);
-      if(dist < this.size + dots.list[i].size) {
-        dots.delete(i, this, op);
-      }
+  touch(dots) {
+    var ret = [];
+    for(var i = 0; i < dots.length; i++) {
+      var d = this.position[0].subtract(dots[i].position);
+      var dx = d.getX();
+      var dy = d.getY();
+      var dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist <= this.size + dots[i].size)
+        ret.push(i);
     }
+    return ret;
   }
 }

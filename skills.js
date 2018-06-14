@@ -2,7 +2,6 @@ class Point {
   constructor(x=null, y=null, size=10, color=null, time=5) {
     var x = x || Math.random() * canvas.width;
     var y = y || Math.random() * canvas.height;
-    console.log(x, y);
     this.position = vector.create(x, y);
     this.size = size;
     this.color = color || "#"+(Math.random()*0xFFFFFF<<0).toString(16);
