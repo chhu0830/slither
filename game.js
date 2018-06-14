@@ -1,7 +1,7 @@
 var canvas = null;
 var context = null;
 var snake = null;
-var over  = true;
+var over  = false;
 var pause = false;
 
 window.onload = function() {
@@ -11,7 +11,7 @@ window.onload = function() {
       case 32:
         if (over) {
           over = false;
-          game();
+          init();
         }
         else pause ^= 1;
         break;
@@ -86,8 +86,13 @@ function init() {
 
   snake1.draw();
   snake2.draw();
-
   dots = new Dots();
+
+  document.getElementById("score1").innerHTML = 0;
+  document.getElementById("score2").innerHTML = 0;
+
+  pause = true;
+  game();
 }
 
 
@@ -105,6 +110,9 @@ function game() {
       dots.delete(i, snake2, snake1);
     });
 
+    over = snake1.touch(snake2.position.map(p => Object({position:p, size:snake2.size}))).length > 0
+        || snake2.touch(snake1.position.map(p => Object({position:p, size:snake1.size}))).length > 0
+
     document.getElementById("score1").innerHTML = snake1.position.length;
     document.getElementById("score2").innerHTML = snake2.position.length;
 
@@ -113,5 +121,5 @@ function game() {
     snake2.draw();
     dots.draw();
   }
-  requestAnimationFrame(game);
+  if (!over) requestAnimationFrame(game);
 }
