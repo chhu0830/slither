@@ -4,6 +4,7 @@ var snake = null;
 var over  = false;
 var pause = false;
 var timeout = null;
+var skills = [Slow];
 
 window.onload = function() {
   document.body.addEventListener("keydown", function(event) {
@@ -100,7 +101,7 @@ function init() {
     if (over) clearInterval(interval);
     if (!pause && !over) {
       document.getElementById('time').innerHTML = --timeout;
-      dots.create(new Point(x=null, y=null, size=Math.ceil(Math.random()*50)));
+      dots.create(new Point());
     }
   }, 1000);
 
@@ -109,8 +110,10 @@ function init() {
 }
 
 
+var n = 0;
 function game() {
   if (!pause) {
+    if (++n % 500 == 0) dots.create(new skills[0]);
     snake1.update();
     snake2.update();
 
