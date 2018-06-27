@@ -1,7 +1,7 @@
 class Snake {
   constructor(x=0, y=0, speed=5, direction=0, radius=32, size=10, color="#000000", body=null) {
-    this.position = [vector.create(x, y)];
-    this.speed    = vector.create(speed, 0);
+    this.position = [new Vector(x, y)];
+    this.speed    = new Vector(speed, 0);
     this.speed.setAngle(direction);
     this.radius   = radius;
     this.size     = size;
@@ -72,7 +72,7 @@ class Snake {
 
   growth() {
     var len = this.position.length
-    this.position.push(vector.create(this.position[len-1].getX(), this.position[len-1].getY()));
+    this.position.push(new Vector(this.position[len-1].getX(), this.position[len-1].getY()));
   }
 
   turnLeft() {

@@ -2,7 +2,7 @@ class Point {
   constructor() {
     var x = Math.random() * canvas.width;
     var y = Math.random() * canvas.height;
-    this.position = vector.create(x, y);
+    this.position = new Vector(x, y);
     this.size = Math.ceil(Math.random() * 50);
     this.color = "#"+(Math.random()*0xFFFFFF<<0).toString(16);
     this.time = 0;
@@ -27,7 +27,7 @@ class Slow {
   constructor() {
     var x = x || Math.random() * canvas.width;
     var y = y || Math.random() * canvas.height;
-    this.position = vector.create(x, y);
+    this.position = new Vector(x, y);
     this.size = 20;
     this.color = 'black';
     this.time = 2000;
