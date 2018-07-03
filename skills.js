@@ -31,6 +31,8 @@ class Slow {
     this.size = 20;
     this.color = 'black';
     this.time = 2000;
+    this.img = document.createElement("img");
+    this.img.src = "./img/dog.jpg";
   }
 
   active(me, op) {
@@ -42,8 +44,12 @@ class Slow {
 
   draw() {
     context.fillStyle = this.color;
+    context.save();
     context.beginPath();
     context.arc(this.position.getX(), this.position.getY(), this.size, 0, Math.PI*2);
-    context.fill();
+    context.clip();
+    context.fill();  
+    context.drawImage(this.img, this.position.getX()-this.size, this.position.getY()-this.size, this.size*2, this.size*2);
+    context.restore();
   }
 }
