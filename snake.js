@@ -19,27 +19,27 @@ class Snake {
     for (var i = this.position.length - 1; i >= 0; i--) {
       context.fillStyle = this.body[i % this.body.length];
       context.beginPath();
-      context.arc(this.position[i].getX(), this.position[i].getY(), this.size, 0, Math.PI*2);
+      context.arc(this.position[i].x, this.position[i].y, this.size, 0, Math.PI*2);
       context.fill();
     }
     context.lineWidth = this.size*2;
     for (var i = this.position.length - 2; i >= 0; i--) {
       context.strokeStyle = this.body[i % this.body.length];
       context.beginPath();
-      context.moveTo(this.position[i].getX(), this.position[i].getY());
-      context.lineTo(this.position[i+1].getX(), this.position[i+1].getY());
+      context.moveTo(this.position[i].x, this.position[i].y);
+      context.lineTo(this.position[i+1].x, this.position[i+1].y);
       context.stroke();
     }
     context.fillStyle = this.color;
     context.beginPath();
-    context.arc(this.position[0].getX(), this.position[0].getY(), this.size, 0, Math.PI*2);
+    context.arc(this.position[0].x, this.position[0].y, this.size, 0, Math.PI*2);
     context.fill();
   }
 
   update() {
     for (var i = this.position.length-1; i > 0; i--) {
-      this.position[i].setX(this.position[i-1].getX());
-      this.position[i].setY(this.position[i-1].getY());
+      this.position[i].setX(this.position[i-1].x);
+      this.position[i].setY(this.position[i-1].y);
     }
 
     if (this.turningLeft) this.turnLeft();
@@ -48,31 +48,31 @@ class Snake {
 
     this.position[0].addTo(this.speed);
 
-    if (this.position[0].getX() < this.size) {
+    if (this.position[0].x < this.size) {
       this.position[0].setX(this.size)
-      if (this.speed.getY() > 0) this.speed.setAngle(Math.PI*0.5);
+      if (this.speed.y > 0) this.speed.setAngle(Math.PI*0.5);
       else this.speed.setAngle(Math.PI*1.5);
     }
-    if (this.position[0].getX() > canvas.width - this.size) {
+    if (this.position[0].x > canvas.width - this.size) {
       this.position[0].setX(canvas.width - this.size);
-      if (this.speed.getY() > 0) this.speed.setAngle(Math.PI*0.5);
+      if (this.speed.y > 0) this.speed.setAngle(Math.PI*0.5);
       else this.speed.setAngle(Math.PI*1.5);
     }
-    if (this.position[0].getY() < this.size) {
+    if (this.position[0].y < this.size) {
       this.position[0].setY(this.size);
-      if (this.speed.getX() > 0) this.speed.setAngle(0);
+      if (this.speed.x > 0) this.speed.setAngle(0);
       else this.speed.setAngle(Math.PI);
     }
-    if (this.position[0].getY() > canvas.height - this.size) {
+    if (this.position[0].y > canvas.height - this.size) {
       this.position[0].setY(canvas.height - this.size);
-      if (this.speed.getX() > 0) this.speed.setAngle(0);
+      if (this.speed.x > 0) this.speed.setAngle(0);
       else this.speed.setAngle(Math.PI);
     }
   }
 
   growth() {
     var len = this.position.length
-    this.position.push(new Vector(this.position[len-1].getX(), this.position[len-1].getY()));
+    this.position.push(new Vector(this.position[len-1].x, this.position[len-1].y));
   }
 
   turnLeft() {
@@ -96,8 +96,8 @@ class Snake {
     var ret = [];
     for(var i = 0; i < dots.length; i++) {
       var d = this.position[0].subtract(dots[i].position);
-      var dx = d.getX();
-      var dy = d.getY();
+      var dx = d.x;
+      var dy = d.y;
       var dist = Math.sqrt(dx*dx + dy*dy);
       if(dist <= this.size + dots[i].size)
         ret.push(i);

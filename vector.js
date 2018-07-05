@@ -1,78 +1,78 @@
 class Vector {
   constructor(x=1, y=0) {
-    this._x = x;
-    this._y = y;
+    this.x = x;
+    this.y = y;
   }
 
   setX(value) {
-    this._x = value;
+    this.x = value;
   }
 
   getX(value) {
-    return this._x;
+    return this.x;
   }
 
   setY(value) {
-    this._y = value;
+    this.y = value;
   }
 
   getY(value) {
-    return this._y;
+    return this.y;
   }
 
   setAngle(angle) {
     var length = this.getLength();
-    this._x = Math.cos(angle) * length;
-    this._y = Math.sin(angle) * length;
+    this.x = Math.cos(angle) * length;
+    this.y = Math.sin(angle) * length;
   }
 
   getAngle() {
-    return Math.atan2(this._y, this._x);
+    return Math.atan2(this.y, this.x);
   }
 
   setLength(length) {
     var angle = this.getAngle();
-    this._x = Math.cos(angle) * length;
-    this._y = Math.sin(angle) * length;
+    this.x = Math.cos(angle) * length;
+    this.y = Math.sin(angle) * length;
   }
 
   getLength() {
-    return Math.sqrt(this._x * this._x + this._y * this._y);
+    return Math.sqrt(this.x * this.x + this.y * this.y);
   }
 
   add(v2) {
-    return new Vector(this._x + v2.getX(), this._y + v2.getY());
+    return new Vector(this.x + v2.getX(), this.y + v2.getY());
   }
 
   subtract(v2) {
-    return new Vector(this._x - v2.getX(), this._y - v2.getY());
+    return new Vector(this.x - v2.getX(), this.y - v2.getY());
   }
 
   multiply(val) {
-    return new Vector(this._x * val, this._y * val);
+    return new Vector(this.x * val, this.y * val);
   }
 
   divide(val) {
-    return new Vector(this._x / val, this._y / val);
+    return new Vector(this.x / val, this.y / val);
   }
 
   addTo(v2) {
-    this._x += v2.getX();
-    this._y += v2.getY();
+    this.x += v2.getX();
+    this.y += v2.getY();
   }
 
   subtractFrom(v2) {
-    this._x -= v2.getX();
-    this._y -= v2.getY();
+    this.x -= v2.getX();
+    this.y -= v2.getY();
   }
 
   multiplyBy(val) {
-    this._x *= val;
-    this._y *= val;
+    this.x *= val;
+    this.y *= val;
   }
 
   divideBy(val) {
-    this._x /= val;
-    this._y /= val;
+    this.x /= val;
+    this.y /= val;
   }
 }

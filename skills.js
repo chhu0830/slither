@@ -18,7 +18,7 @@ class Point {
     if (this.rate < 100) this.rate += 2;
     context.fillStyle = this.color;
     context.beginPath();
-    context.arc(this.position.getX(), this.position.getY(), Math.ceil(this.size * this.rate/100), 0, Math.PI*2);
+    context.arc(this.position.x, this.position.y, Math.ceil(this.size * this.rate/100), 0, Math.PI*2);
     context.fill();
   }
 }
@@ -43,13 +43,12 @@ class Slow {
   }
 
   draw() {
-    context.fillStyle = this.color;
     context.save();
     context.beginPath();
-    context.arc(this.position.getX(), this.position.getY(), this.size, 0, Math.PI*2);
+    context.arc(this.position.x, this.position.y, this.size, 0, Math.PI*2);
     context.clip();
     context.fill();  
-    context.drawImage(this.img, this.position.getX()-this.size, this.position.getY()-this.size, this.size*2, this.size*2);
+    context.drawImage(this.img, this.position.x-this.size, this.position.y-this.size, this.size*2, this.size*2);
     context.restore();
   }
 }
