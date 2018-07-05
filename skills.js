@@ -25,11 +25,10 @@ class Point {
 
 class Slow {
   constructor() {
-    var x = x || Math.random() * canvas.width;
-    var y = y || Math.random() * canvas.height;
+    var x = Math.random() * canvas.width;
+    var y = Math.random() * canvas.height;
     this.position = new Vector(x, y);
     this.size = 20;
-    this.color = 'black';
     this.time = 2000;
     this.img = document.createElement("img");
     this.img.src = "./img/dog.jpg";
@@ -47,7 +46,6 @@ class Slow {
     context.beginPath();
     context.arc(this.position.x, this.position.y, this.size, 0, Math.PI*2);
     context.clip();
-    context.fill();  
     context.drawImage(this.img, this.position.x-this.size, this.position.y-this.size, this.size*2, this.size*2);
     context.restore();
   }
