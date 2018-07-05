@@ -1,12 +1,12 @@
 class Snake {
-  constructor(x=0, y=0, speed=5, direction=0, radius=32, size=10, color="#000000", body=null) {
+  constructor(x, y, speed, direction, radius, size, color, body) {
     this.position = [new Vector(x, y)];
     this.speed    = new Vector(speed, 0);
     this.speed.setAngle(direction);
     this.radius   = radius;
     this.size     = size;
     this.color    = color;
-    this.body     = body || [color];
+    this.body     = body;
     this.turningLeft = false;
     this.turningRight = false;
     this.speedingUpRate = 3;
