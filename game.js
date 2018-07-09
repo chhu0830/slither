@@ -4,7 +4,7 @@ var snake = null;
 var over  = false;
 var pause = false;
 var timeout = null;
-var skills = [Slow];
+var skill_list = [Slow];
 
 window.onload = function() {
   document.body.addEventListener("keydown", function(event) {
@@ -88,7 +88,7 @@ function init() {
 
   snake1.draw();
   snake2.draw();
-  dots = new Dots();
+  skills = new Skills();
 
   document.getElementById("score1").innerHTML = 0;
   document.getElementById("score2").innerHTML = 0;
@@ -101,7 +101,7 @@ function init() {
     if (over) clearInterval(interval);
     if (!pause && !over) {
       document.getElementById('time').innerHTML = --timeout;
-      dots.create(new Point());
+      skills.create(new Point());
     }
   }, 1000);
 
@@ -113,15 +113,15 @@ function init() {
 var n = 0;
 function game() {
   if (!pause) {
-    if (++n % 500 == 0) dots.create(new skills[0]);
+    if (++n % 500 == 0) skills.create(new skill_list[0]);
     snake1.update();
     snake2.update();
 
-    snake1.touch(dots.list).forEach(i => {
-      dots.delete(i, snake1, snake2);
+    snake1.touch(skills.list).forEach(i => {
+      skills.delete(i, snake1, snake2);
     });
-    snake2.touch(dots.list).forEach(i => {
-      dots.delete(i, snake2, snake1);
+    snake2.touch(skills.list).forEach(i => {
+      skills.delete(i, snake2, snake1);
     });
 
     var t1 = snake1.touch(snake2.position.map(p => Object({position:p, size:snake2.size})));
@@ -140,7 +140,7 @@ function game() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     snake1.draw();
     snake2.draw();
-    dots.draw();
+    skills.draw();
   }
   if (!over) requestAnimationFrame(game);
 }

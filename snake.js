@@ -92,14 +92,14 @@ class Snake {
     }
   }
 
-  touch(dots) {
+  touch(skills) {
     var ret = [];
-    for(var i = 0; i < dots.length; i++) {
-      var d = this.position[0].subtract(dots[i].position);
+    for(var i = 0; i < skills.length; i++) {
+      var d = this.position[0].subtract(skills[i].position);
       var dx = d.x;
       var dy = d.y;
       var dist = Math.sqrt(dx*dx + dy*dy);
-      if(dist <= this.size + dots[i].size)
+      if(dist <= this.size + skills[i].size)
         ret.push(i);
     }
     return ret;
