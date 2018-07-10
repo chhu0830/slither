@@ -70,9 +70,11 @@ class Snake {
     }
   }
 
-  growth() {
-    var len = this.position.length
-    this.position.push(new Vector(this.position[len-1].x, this.position[len-1].y));
+  growth(n=1) {
+    var len = this.position.length;
+    for (var i = 0; i < n; i++) {
+      this.position.push(new Vector(this.position[len-1].x, this.position[len-1].y));
+    }
   }
 
   turnLeft() {

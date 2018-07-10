@@ -126,8 +126,12 @@ function game() {
 
     var t1 = snake1.touch(snake2.position.map(p => Object({position:p, size:snake2.size})));
     var t2 = snake2.touch(snake1.position.map(p => Object({position:p, size:snake1.size})));
-    if (t1.length > 0) snake2.position.splice(t1[0] || 1);
+    var len1 = snake2.position.length - (t1[0] || 0);
+    var len2 = snake1.position.length - (t2[0] || 0);
     if (t2.length > 0) snake1.position.splice(t2[0] || 1);
+    if (t1.length > 0) snake2.position.splice(t1[0] || 1);
+    if (t1.length > 0) snake1.growth(len1 / 2);
+    if (t2.length > 0) snake2.growth(len2 / 2);
     if (timeout == 0) {
       if (snake1.position.length > snake2.position.length) gameover("Red Win");
       else if (snake2.position.length > snake1.position.length) gameover("Blue Win");
