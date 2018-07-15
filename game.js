@@ -4,7 +4,8 @@ var snake = null;
 var over  = false;
 var pause = false;
 var timeout = null;
-var skill_list = [Slow];
+var skills = null;
+var skill_list = [Stop, AV_Guy, Sandy, Slow];
 
 window.onload = function() {
   document.body.addEventListener("keydown", function(event) {
@@ -76,7 +77,7 @@ function init() {
                       radius = 32,
                       size = 10,
                       color = "red",
-                      body = ["#FF0000", "#FFA500", "#FFFF00", "#00FF00", "#007FFF", "#0000FF", "#8B00FF"]);
+                      body = ["#ff6566", "#ff6966", "#ff8266", "#ff9267", "#ff9f63", "#ff9d64", "#ffb764", "#fcb865", "#ffbf68", "#fcb865", "#ffb764", "#ff9d64", "#ff9f63", "#ff9267", "#ff9267", "#ff8266", "#ff6966", "#ff6966"]);
   snake2 = new Snake( x = canvas.width - 100,
                       y = canvas.height/2 - 5,
                       speed = 5,
@@ -113,7 +114,8 @@ function init() {
 var n = 0;
 function game() {
   if (!pause) {
-    if (++n % 500 == 0) skills.create(new skill_list[0]);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    if (++n % 300 == 0) skills.create(new skill_list[Math.floor(Math.random() * skill_list.length)]);
     snake1.update();
     snake2.update();
 
@@ -141,7 +143,6 @@ function game() {
     document.getElementById("score1").innerHTML = snake1.position.length;
     document.getElementById("score2").innerHTML = snake2.position.length;
 
-    context.clearRect(0, 0, canvas.width, canvas.height);
     snake1.draw();
     snake2.draw();
     skills.draw();
