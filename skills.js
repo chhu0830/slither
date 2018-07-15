@@ -122,16 +122,6 @@ class Sandy {
   }
 
   active(me, op) {
-
-    var snakeFake = new Snake( x = canvas.width - 100,
-                      y = canvas.height/2 - 5,
-                      speed = 5,
-                      direction = -Math.PI,
-                      radius = 32,
-                      size = 10,
-                      color = "#ff6566",
-                      body = ["#ff6566", "#ff6966", "#ff8266", "#ff9267", "#ff9f63", "#ff9d64", "#ffb764", "#fcb865", "#ffbf68", "#fcb865", "#ffb764", "#ff9d64", "#ff9f63", "#ff9267", "#ff9267", "#ff8266", "#ff6966", "#ff6966"]);
-    snakeFake.draw();
     me.size += 10;
     setTimeout(function() {
       me.size -= 10;

@@ -72,16 +72,17 @@ function init() {
 
   snake1 = new Snake( x = 100,
                       y = canvas.height/2 - 5,
-                      speed = 5,
-                      direction = 0,
-                      radius = 32,
-                      size = 10,
-                      color = "red",
-                      body = ["#ff6566", "#ff6966", "#ff8266", "#ff9267", "#ff9f63", "#ff9d64", "#ffb764", "#fcb865", "#ffbf68", "#fcb865", "#ffb764", "#ff9d64", "#ff9f63", "#ff9267", "#ff9267", "#ff8266", "#ff6966", "#ff6966"]);
+                      snake1_config["speed"],
+                      snake1_config["direction"],
+                      snake1_config["radius"],
+                      snake1_config["size"],
+                      snake1_config["color"],
+                      snake1_config["body"]
+                    );
   snake2 = new Snake( x = canvas.width - 100,
                       y = canvas.height/2 - 5,
-                      speed = 5,
-                      direction = -Math.PI,
+                      snake2_config["speed"],
+                      snake2_config["direction"],
                       radius = 32,
                       size = 10,
                       color = "blue",
