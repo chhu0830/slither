@@ -1,11 +1,10 @@
 class Snake {
-  constructor(x, y, speed, direction, radius, size, color, body) {
+  constructor(x, y, speed, direction, radius, size, head, body) {
     this.position = [new Vector(x, y)];
     this.speed    = new Vector(speed, 0);
     this.speed.setAngle(direction);
     this.radius   = radius;
     this.size     = size;
-    this.color    = color;
     this.body     = body;
     this.turningLeft = false;
     this.turningRight = false;
@@ -13,6 +12,8 @@ class Snake {
     this.speedingUp = false;
     this.consuming = 0;
     this.consumeGap = 50;
+    this.img = document.createElement("img");
+    this.img.src = head;
   }
 
   draw() {
@@ -22,18 +23,18 @@ class Snake {
       context.arc(this.position[i].x, this.position[i].y, this.size, 0, Math.PI*2);
       context.fill();
     }
-    context.lineWidth = this.size*2;
-    for (var i = this.position.length - 2; i >= 0; i--) {
-      context.strokeStyle = this.body[i % this.body.length];
-      context.beginPath();
-      context.moveTo(this.position[i].x, this.position[i].y);
-      context.lineTo(this.position[i+1].x, this.position[i+1].y);
-      context.stroke();
-    }
+    /*
     context.fillStyle = this.color;
     context.beginPath();
     context.arc(this.position[0].x, this.position[0].y, this.size, 0, Math.PI*2);
     context.fill();
+    */
+    context.save();
+    context.beginPath();
+    context.arc(this.position[0].x, this.position[0].y, this.size, 0, Math.PI*2);
+    context.clip();
+    context.drawImage(this.img, this.position[0].x-this.size, this.position[0].y-this.size, this.size*2, this.size*2);
+    context.restore();
   }
 
   update() {

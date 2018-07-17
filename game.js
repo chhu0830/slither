@@ -75,7 +75,7 @@ function init() {
                       snake1_config["direction"],
                       snake1_config["radius"],
                       snake1_config["size"],
-                      snake1_config["color"],
+                      snake1_config["head"],
                       snake1_config["body"]
                     );
   snake2 = new Snake( x = canvas.width - 100,
@@ -84,7 +84,7 @@ function init() {
                       snake2_config["direction"],
                       snake2_config["radius"],
                       snake2_config["size"],
-                      snake2_config["color"],
+                      snake2_config["head"],
                       snake2_config["body"]
                     );
 
@@ -118,6 +118,7 @@ function game() {
   if (!pause) {
     context.clearRect(0, 0, canvas.width, canvas.height);
     if (++n % 300 == 0) skills.create(new skillList[Math.floor(Math.random() * skillList.length)]);
+    // if (++n % 300 == 0) skills.create(new skillList[0]);
     snake1.update();
     snake2.update();
 
