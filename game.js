@@ -5,7 +5,6 @@ var over  = false;
 var pause = false;
 var timeout = null;
 var skills = null;
-var skill_list = [Stop, AV_Guy, Sandy, Slow];
 
 window.onload = function() {
   document.body.addEventListener("keydown", function(event) {
@@ -97,7 +96,7 @@ function init() {
   document.getElementById("score2").innerHTML = 0;
   document.getElementById("msg").innerHTML = "";
 
-  timeout = 6;
+  timeout = playTime;
   document.getElementById('time').innerHTML = timeout;
 
   var interval = null;
@@ -118,7 +117,7 @@ var n = 0;
 function game() {
   if (!pause) {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    if (++n % 300 == 0) skills.create(new skill_list[Math.floor(Math.random() * skill_list.length)]);
+    if (++n % 300 == 0) skills.create(new skillList[Math.floor(Math.random() * skillList.length)]);
     snake1.update();
     snake2.update();
 
