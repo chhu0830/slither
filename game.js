@@ -83,10 +83,11 @@ function init() {
                       y = canvas.height/2 - 5,
                       snake2_config["speed"],
                       snake2_config["direction"],
-                      radius = 32,
-                      size = 10,
-                      color = "blue",
-                      body = ["#FF0000", "#FFA500", "#FFFF00", "#00FF00", "#007FFF", "#0000FF", "#8B00FF"]);
+                      snake2_config["radius"],
+                      snake2_config["size"],
+                      snake2_config["color"],
+                      snake2_config["body"]
+                    );
 
   snake1.draw();
   snake2.draw();
