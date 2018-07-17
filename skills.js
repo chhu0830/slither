@@ -72,31 +72,30 @@ class Slow {
   }
 }
 
-class PushFood {
+class Night {
   constructor() {
     var x = Math.random() * canvas.width;
     var y = Math.random() * canvas.height;
     this.position = new Vector(x, y);
     this.size = 20;
-    this.time = 5000;
+    this.time = 1000;
     this.img = document.createElement("img");
-    this.img.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY-yE-7mdD4adekzFBPythGfel5QjrWeqkNcO9-FoIKbH209o-";
-    this.s = skills;
+    this.img.src = "https://vignette.wikia.nocookie.net/mtg/images/2/2f/The_Dark_symbol.png/revision/latest?cb=20100208020734";
   }
 
   active(me, op) {
-    var interval = setInterval(function(s) {
-      for (var i = 0, len = s.length; i < len; i++) {
-        var dx = op.position[0].x - s[i].position.x;
-        var dy = op.position[0].y - s[i].position.y;
-        var r = op.speed.getLength()*2 + s[i].size + op.size
-        if (dx*dx + dy*dy < r*r) {
-          s[i].position.x += op.speed.x;
-          s[i].position.y += op.speed.y;
-        }
-      }
-    }, 1, this.s.list);
-    setTimeout(clearInterval, 3000, interval);
+    var block = document.createElement("div");
+    block.style.height = document.body.clientHeight + "px";
+    block.style.width = document.body.clientWidth + "px";
+    block.style.position = "absolute";
+    block.style.top = 0;
+    block.style.left = 0;
+    block.style.backgroundColor = "black";
+    block.style.zIndex = 10;
+    document.body.appendChild(block);
+    setTimeout(function() {
+      document.body.removeChild(block)
+    }, this.time);
   }
 
   draw() {
