@@ -94,8 +94,9 @@ function init() {
 
   document.getElementById("score1").innerHTML = 0;
   document.getElementById("score2").innerHTML = 0;
+  document.getElementById("msg").innerHTML = "";
 
-  timeout = 60;
+  timeout = 6;
   document.getElementById('time').innerHTML = timeout;
 
   var interval = null;
@@ -153,5 +154,5 @@ function game() {
 
 function gameover(content) {
   over = true;
-  document.getElementById("time").innerHTML = content;
+  document.getElementById("msg").innerHTML = content;
 }
