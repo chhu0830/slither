@@ -2,7 +2,7 @@
 Project for NCTU CScamp 2018
   
   
-## Skills Description
+## Skill Descriptions
   
 ![](https://i.imgur.com/UJcwlAA.png)  
 傳送到隨機位置  
